@@ -1,0 +1,90 @@
+//Joey slepski lab 7 race
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#define race 70
+
+
+    void mtort(int *torpos);
+    void mhare(int *harepos);
+    int getRandomNumber();
+    void printposition(int harepos, int torpos);
+    
+int main(){
+    //random numb
+    srand(time(NULL));
+    //position
+    int tortpos=1;
+    int harepos=1;
+    int finish= race;
+    printf("On your Mark\n");
+    printf("Get set\n");
+    printf("Bang\n");
+    printf("Theyre Off\n");
+    while(tortpos < finish && harepos <finish){
+        mtort(&tortpos);
+        mhare(&harepos);
+        printposition(harepos, tortpos);
+    }//keeps running until finish line
+    if(tortpos>=finish && harepos >= finish){
+        printf("Its a tie");
+        
+    }
+    if(tortpos >=finish){
+        printf("Tortise has won the race");
+        
+    }
+    if(harepos >= finish){
+        printf("Hare has won the race");
+       
+   }//checks to see
+
+return 0;
+
+}
+void mtort(int *torpos){
+    int move=getRandomNumber();
+    if(move>=1 && move <=5){
+        *torpos +=3;
+    } else if(move >=6 && move <=7){
+        *torpos -=6;
+    } else {
+        *torpos+=1;
+    }//moves tort with guidelines
+    
+}
+void mhare(int *harepos){
+    int move=getRandomNumber();
+    if(move >= 1 && move<=2 ){
+        
+    } else if(move >= 3 && move <=4){
+        *harepos+=9;
+    } else if(move==5){
+        *harepos -=12;
+    } else if(move >=6&& move<=9){
+        *harepos+=1;
+    }else {
+        *harepos -=2;
+    }//moves hare with guidelines
+}
+void printposition(int harepos, int torpos){
+    for(int i=1; i<=70; i++){
+        if(harepos==i && i==torpos && torpos==harepos ){
+            printf("OUCH");
+        } else if(i==harepos){
+            printf("H");
+        } else if(i==torpos){
+            printf("T");
+            
+        }else{
+            printf(" ");
+        }//prints the position to show where they are
+    
+    }
+    printf("\n");
+    
+}
+int getRandomNumber(){
+    return rand()%10 +1;
+} //gets the random num
